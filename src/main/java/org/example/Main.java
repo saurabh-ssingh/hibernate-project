@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+import org.example.entity.Certificate;
 import org.example.entity.Student;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
@@ -11,9 +13,17 @@ public class Main {
   public static void main(String[] args) {
 
     final Student student = new Student();
-    student.setName("Name");
-    student.setPhoneNumber("+919792733298");
-    student.setAbout("I am student..");
+    student.setName("Saurabh");
+    student.setPhoneNumber("+919792733299");
+    student.setAbout("I am student....");
+
+    Certificate certificate = new Certificate();
+    certificate.setTitle("java certification");
+    certificate.setAbout("This is java certification....");
+    certificate.setLink("http://loalhost:8080/java_certificatte");
+    certificate.setStudent(student);
+
+    student.setCertificateList(List.of(certificate));
 
 
     final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

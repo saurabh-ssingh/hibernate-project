@@ -1,12 +1,16 @@
 package org.example.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -26,6 +30,8 @@ public class Student {
   @Column(name = "about")
   @Lob
   private String about;
+  @OneToMany(mappedBy = "student", fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
+  private List<Certificate> certificateList;
 
   public Integer getId() {
     return id;
@@ -33,6 +39,14 @@ public class Student {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public List<Certificate> getCertificateList() {
+    return certificateList;
+  }
+
+  public void setCertificateList(List<Certificate> certificateList) {
+    this.certificateList = certificateList;
   }
 
   public String getName() {
